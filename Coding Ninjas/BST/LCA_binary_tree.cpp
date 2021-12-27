@@ -61,33 +61,76 @@ class BinaryTreeNode {
 
 using namespace std;
 
-int getLCA(BinaryTreeNode <int>* root , int a, int b) {
-    
-    // Write your code here
-    
+BinaryTreeNode<int> *LCABTHelper(BinaryTreeNode<int> *root, int k1, int k2)
+{
     if(root == NULL)
     {
-        return -1;
+        return NULL;
     }
     
-    if(root->data == a || root->data == b)
+    if(root->data == k1 || root->data == k2)
     {
-        return root->data;
+        return root;
     }
     
-    int leftSub = getLCA(root->left, a, b);
-    int rightSub = getLCA(root->right, a, b);
+    BinaryTreeNode<int> *leftSub = LCABTHelper(root->left, k1, k2);
+    BinaryTreeNode<int> *rightSub = LCABTHelper(root->right, k1, k2);
     
-    if(leftSub == -1)
+    if(leftSub && rightSub)
     {
-        return rightSub;
+        return root;
     }
-    if(rightSub == -1)
+    
+    if(leftSub)
     {
         return leftSub;
     }
     
-    return root->data;
+    return rightSub;
+}
+
+int getLCA(BinaryTreeNode <int>* root , int a, int b) {
+    
+    // Write your code here
+   
+   // 1st Method
+    
+//     if(root == NULL)
+//     {
+//         return -1;
+//     }
+    
+//     if(root->data == a || root->data == b)
+//     {
+//         return root->data;
+//     }
+    
+//     int leftSub = getLCA(root->left, a, b);
+//     int rightSub = getLCA(root->right, a, b);
+    
+//     if(leftSub == -1)
+//     {
+//         return rightSub;
+//     }
+//     if(rightSub == -1)
+//     {
+//         return leftSub;
+//     }
+    
+//     return root->data;
+   
+   
+   // 2nd Method
+   
+   BinaryTreeNode<int> *node = LCABTHelper(root, k1, k2);
+    if(node != NULL)
+    {
+        return node->data;
+    }
+    else
+    {
+        return -1;
+    }
     
 }
 
