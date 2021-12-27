@@ -51,6 +51,37 @@ bool searchInBST(BinaryTreeNode<int> *root , int k) {
     
 	// Write your code here
     
+    // 1st Method
+	
+//     if(root == NULL)
+//     {
+//         return false;
+//     }
+    
+//     if(root->data == k)
+//     {
+//         return true;
+//     }
+    
+//     bool result1, result2;
+    
+//     if(root->data > k)
+//     {
+//         result1 = searchInBST(root->left, k);
+//     }
+//     else
+//     {
+//         result2 = searchInBST(root->right, k);
+//     }
+    
+//     if(result1 == true)
+//     {
+//         return true;
+//     }
+	
+	
+      // 2nd Method
+	
     if(root == NULL)
     {
         return false;
@@ -61,20 +92,13 @@ bool searchInBST(BinaryTreeNode<int> *root , int k) {
         return true;
     }
     
-    bool result1, result2;
-    
     if(root->data > k)
     {
-        result1 = searchInBST(root->left, k);
+        return searchInBST(root->left, k);
     }
     else
     {
-        result2 = searchInBST(root->right, k);
-    }
-    
-    if(result1 == true)
-    {
-        return true;
+        return searchInBST(root->right, k);
     }
     
 }
