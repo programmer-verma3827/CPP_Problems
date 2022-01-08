@@ -100,9 +100,67 @@ void findMedian(int *arr, int n)
                 median = (p.size() > q.size()) ? p.top() : q.top();
                 cout<<median<<" ";
             }
-        }
-        
+        }   
     }
+    
+    
+    // 2nd Method
+    
+    priority_queue<int> maxHeap;
+    priority_queue<int, vector<int>, greater<int>> minHeap;
+    
+    for(int i=0;i<n;i++)
+    {
+        if(maxHeap.size() && arr[i] > maxHeap.top())
+        {
+            minHeap.push(arr[i]);
+        }
+        else
+        {
+            maxHeap.push(arr[i]);
+        }
+    
+    if(abs((int)maxHeap.size() - (int)minHeap.size()) > 1)
+    {
+        if(maxHeap.size() > minHeap.size())
+        {
+            int temp = maxHeap.top();
+            maxHeap.pop();
+            minHeap.push(temp);
+        }
+        else
+        {
+            int temp = minHeap.top();
+            minHeap.pop();
+            maxHeap.push(temp);
+        }
+    }
+    
+    int median;
+    int totalSize = maxHeap.size() + minHeap.size();
+    
+    if(totalSize % 2 == 1)
+    {
+        if(maxHeap.size() > minHeap.size())
+        {
+            median = maxHeap.top();
+        }
+        else
+        {
+            median = minHeap.top();
+        }
+    }
+    
+    else
+    {
+        median = 0;
+        if(!maxHeap.empty()) median = median + maxHeap.top();
+        if(!minHeap.empty()) median = median + minHeap.top();
+        median = median/2;
+    }
+    
+    cout<<median<<" ";
+    }  
 }
 
 
