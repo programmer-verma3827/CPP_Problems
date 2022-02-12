@@ -54,66 +54,12 @@ vector<int> *getPathHelper(int** edges, int n, int v1, int v2, bool *visited)
 {   
     // 1st Method
     
-//     queue<int> q;
-//     q.push(v1);
-//     visited[v1] = true;
-    
-//     unordered_map<int, int> map;
-//     bool pathDone = false;
-    
-//     while(!q.empty() && !pathDone)
-//     {
-//         int front = q.front();
-//         q.pop();
-        
-//         for(int i=0;i<n;i++)
-//         {
-//             if(edges[front][i] == 1 && visited[i] == false)
-//             {
-//                 map[i] = front;
-//                 q.push(i);
-//                 visited[i] = true;
-                
-//                 if(i == v2)
-//                 {
-//                     pathDone = true;
-//                     break;
-//                 }
-//             }
-//         }
-//     }
-    
-//     if(!pathDone)
-//     {
-//         return NULL;
-//     }
-    
-//     else
-//     {
-//         vector<int> *output = new vector<int>();
-//         int curr = v2;
-//         output->push_back(curr);
-        
-//         while(curr != v1)
-//         {
-//             curr = map[curr];
-//             output->push_back(curr);
-//         }
-        
-//         return output;
-//     }
-    
-    
-    // 2nd Method
-    
-    vector<int> *output = new vector<int>();
-    
     queue<int> q;
     q.push(v1);
     visited[v1] = true;
     
+    unordered_map<int, int> map;
     bool pathDone = false;
-    vector<int> vector(n, -1);
     
     while(!q.empty() && !pathDone)
     {
@@ -122,9 +68,9 @@ vector<int> *getPathHelper(int** edges, int n, int v1, int v2, bool *visited)
         
         for(int i=0;i<n;i++)
         {
-            if(edges[front][i] && !visited[i])
+            if(edges[front][i] == 1 && visited[i] == false)
             {
-                vector[i] = front;
+                map[i] = front;
                 q.push(i);
                 visited[i] = true;
                 
@@ -137,8 +83,6 @@ vector<int> *getPathHelper(int** edges, int n, int v1, int v2, bool *visited)
         }
     }
     
-    delete [] visited;
-    
     if(!pathDone)
     {
         return NULL;
@@ -146,12 +90,13 @@ vector<int> *getPathHelper(int** edges, int n, int v1, int v2, bool *visited)
     
     else
     {
+        vector<int> *output = new vector<int>();
         int curr = v2;
         output->push_back(curr);
         
         while(curr != v1)
         {
-            curr = vector[curr];
+            curr = map[curr];
             output->push_back(curr);
         }
         
