@@ -53,38 +53,71 @@ Node *deleteNode(Node *head, int pos)
 {
     // Write your code here.
     
-    Node* temp = head;
-    Node* prev = NULL;
-    int count=0;
+	// 1st Method
+	
+//     Node* temp = head;
+//     Node* prev = NULL;
+//     int count=0;
     
+//     if(head == NULL)
+//     {
+//         return head;
+//     }
+    
+//     if(pos==0)
+//     {
+//         head = temp -> next;
+//         delete(temp);
+//     }
+//     else
+//     {
+//         while(pos != count && temp != NULL)
+//         {
+//             ++count;
+//             prev = temp;
+//             temp = temp -> next;
+//         }
+//         if(temp != NULL)
+//         {
+//             prev -> next = temp -> next;
+//             delete(temp);
+//         }
+//         if(prev -> next == NULL)
+//         {
+//             return head;
+//         }
+//     }
+//     return head;
+	
+	
+	// 2nd Method
+	 
     if(head == NULL)
     {
         return head;
     }
     
-    if(pos==0)
+    if(pos == 0)
     {
-        head = temp -> next;
-        delete(temp);
+        return head->next;
     }
-    else
+    
+    Node *curr = head;
+    int currPos = 0;
+    
+    while(curr != NULL && currPos < pos-1)
     {
-        while(pos != count && temp != NULL)
-        {
-            ++count;
-            prev = temp;
-            temp = temp -> next;
-        }
-        if(temp != NULL)
-        {
-            prev -> next = temp -> next;
-            delete(temp);
-        }
-        if(prev -> next == NULL)
-        {
-            return head;
-        }
+        currPos++;
+        curr = curr->next;
     }
+    
+    if(curr == NULL || curr->next == NULL)
+    {
+        return head;
+    }
+    
+    curr->next = curr->next->next;
+    
     return head;
     
 }
