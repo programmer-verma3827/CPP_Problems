@@ -79,23 +79,37 @@ Node *takeinput()
 void printReverse(Node *head)
 {
     //Write your code here
+	
+	
+	// 1st Method
     
-    if(head==NULL){
+//     if(head==NULL){
+//         return;
+//     }
+//     Node *curr=head;
+//     Node *temp=head;
+//     Node *prev=NULL;
+//     while(curr!=NULL){
+//         temp=curr->next;
+//         curr->next=prev;
+//         prev=curr;
+//         curr=temp;
+//     }
+//     while(prev!=NULL){
+//         cout<<prev->data<<" ";
+//         prev=prev->next;
+//     }
+	
+	
+	// 2nd Method
+    
+    if(head == NULL)
+    {
         return;
     }
-    Node *curr=head;
-    Node *temp=head;
-    Node *prev=NULL;
-    while(curr!=NULL){
-        temp=curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=temp;
-    }
-    while(prev!=NULL){
-        cout<<prev->data<<" ";
-        prev=prev->next;
-    }
+    
+    printReverse(head->next);
+    cout<<head->data<<" ";
     
 }
 
