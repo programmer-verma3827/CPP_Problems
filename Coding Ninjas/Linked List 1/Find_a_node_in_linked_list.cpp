@@ -41,22 +41,42 @@ Node *takeinput()
 int findNode(Node *head, int n){
     
     // Write your code here.
+	
+	
+	// 1st Method
     
-    Node* curr = head;
-    int count=0;
+//     Node* curr = head;
+//     int count=0;
     
-    while(curr != NULL && n != curr->data)
-    {
-        curr = curr -> next;
-        count++;
-    }
+//     while(curr != NULL && n != curr->data)
+//     {
+//         curr = curr -> next;
+//         count++;
+//     }
     
-    if(curr == NULL)
-    {
-        return -1;
-    }
+//     if(curr == NULL)
+//     {
+//         return -1;
+//     }
     
-    return count;
+//     return count;
+	
+	
+	// 2nd Method
+	
+	int pos = 0;
+	while(head != NULL)
+	{
+		if(head -> data == n)
+		{
+			return pos;
+		}
+		
+		pos++;
+		head = head->next;
+	}
+	
+	return -1;	
 }
 
 int main()
