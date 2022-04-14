@@ -14,16 +14,51 @@ public:
         
         // 1st Method (Recursive)
         
-        if(head == NULL || head->next == NULL)
+//         if(head == NULL || head->next == NULL)
+//         {
+//             return head;
+//         }
+        
+//         ListNode *temp = head->next;
+//         head->next = swapPairs(head->next->next);
+//         temp->next = head;
+        
+//         return temp;
+        
+        
+        // 2nd Method Iterative
+        
+        ListNode *dummy = new ListNode();
+        ListNode *temp = dummy;
+        queue<ListNode *> q;
+        
+        while(head)
         {
-            return head;
+            q.push(head);
+            head = head->next;
         }
         
-        ListNode *temp = head->next;
-        head->next = swapPairs(head->next->next);
-        temp->next = head;
+        while(q.size() >= 2)
+        {
+            ListNode *first = q.front();
+            q.pop();
+            ListNode *second = q.front();
+            q.pop();
+            
+            temp->next = second;
+            temp = temp->next;
+            temp->next = first;
+            temp = temp->next;
+        }
         
-        return temp;
+        if(!q.empty())
+        {
+            temp->next = q.front();
+            temp = temp->next;
+        }
+        
+        temp->next = NULL;
+        return dummy->next;
         
     }
 };
